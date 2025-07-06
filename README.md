@@ -1,13 +1,34 @@
-# React + Vite
+# 🍽️ FoodComma — Full Stack Pizza Ordering App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FoodComma is a modern, full-stack pizza ordering web application built with the **MERN stack**. It allows users to browse dynamic menus, manage carts, place orders, and access order history. Admins can manage products, view orders, and control platform data — all through a responsive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
+- 🔐 **User Authentication** (Login/Register)
+- 🍕 **Dynamic Menus** with filtering & category support
+- 🛒 **Cart Management** with item count, quantity update, and removal
+- 📦 **Order Placement** and tracking
+- 🧑‍💼 **Admin Panel** for product & order management
+- 🌐 Fully responsive UI using **Tailwind CSS**
+- 🧱 Clean backend architecture using service-repository pattern
 
---------
+---
 
-- [Free SVG Illustrations](https://undraw.co/illustrations)
+## 🛠️ Tech Stack
+
+| Frontend     | Backend     | Database | Styling       | Auth & Uploads       |
+|--------------|-------------|----------|---------------|-----------------------|
+| React.js     | Node.js     | MongoDB  | Tailwind CSS  | JWT Auth, Cloudinary |
+
+---
+
+## 📸 Screenshots
+
+> Add your screenshots here using Markdown:
+
+```md
+![Home Page](./screenshots/home.png)
+![Cart Page](./screenshots/cart.png)
+![Admin Dashboard](./screenshots/admin.png)
