@@ -28,7 +28,46 @@ FoodComma is a modern, full-stack pizza ordering web application built with the 
 
 > Add your screenshots here using Markdown:
 
-```md
-![Home Page](./screenshots/home.png)
-![Cart Page](./screenshots/cart.png)
-![Admin Dashboard](./screenshots/admin.png)
+🧑‍💻 Folder Structure
+
+myPizzaAppFtontend/ │React Frontend │ ├── src/ │ ├── public/ │ └── .env │ ├── server/ # Node.js + Express Backend │ ├── src/ │ │ ├── controllers/ │ │ ├── routes/ │ │ ├── services/ │ │ ├── repositories/ │ │ └── schemas/ │ └── .env │ ├── README.md └── package.json # Optional root scripts (monorepo)
+
+🧪 Local Setup
+🔧 Prerequisites
+Node.js
+
+MongoDB running locally or Atlas
+
+Cloudinary account (for product image uploads)
+
+📦 Clone the repo
+git clone https://github.com/sarojkr05/FoodCommaFrontend
+cd FoodCommaFrontend
+
+⚙️ Setup Backend
+
+cd FooCommaBackend
+npm install
+npm start
+
+💻 Setup Frontend
+
+cd FoodCommaFrontend
+npm install
+npm run dev
+
+🔒 Environment Variables
+Create a .env file inside /myPizzaAppBackend with:
+
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+👨‍💻 Author
+Saroj Kumar Das
+
+📧 sarojsarojkumar753@gmail.com
+
+🌐 Portfolio (https://sarojkr.netlify.app/)
