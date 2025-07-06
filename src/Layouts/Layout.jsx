@@ -1,104 +1,109 @@
-import { useDispatch, useSelector } from 'react-redux';
-import Footer from '../Components/Footer';
-import Pizzalogo from '../assets/Images/pizza1.png';
-import CartIcon from '../assets/Images/cart.svg';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../Redux/Slices/AuthSlice';
-import { getCartDetails } from '../Redux/Slices/CartSlice';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import Footer from "../Components/Footer";
+import Pizzalogo from "../assets/Images/pizza1.png";
+import CartIcon from "../assets/Images/cart.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../Redux/Slices/AuthSlice";
+import { getCartDetails } from "../Redux/Slices/CartSlice";
+import { useEffect, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 function Layout({ children }) {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { cartsData } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-    const { cartsData } = useSelector((state) => state.cart);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  async function handleLogout(e) {
+    e.preventDefault();
+    dispatch(logout());
+  }
 
-    async function handleLogout(e) {
-        e.preventDefault();
-        dispatch(logout());
-        
+  async function fetchCartDetails() {
+    const res = await dispatch(getCartDetails());
+    if (res?.payload?.isUnauthorized) {
+      dispatch(logout());
     }
+  }
 
-    async function fetchCartDetails() {
-        const res = await dispatch(getCartDetails());
-        if(res?.payload?.isUnauthorized) {
-            dispatch(logout());
-        }
-    }   
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchCartDetails();
+    }
+  }, []);
 
-    useEffect(() => {
-        if(isLoggedIn) {
-            fetchCartDetails();
-        }
-    }, []);
+  return (
+    <div>
+      <nav className="flex items-center justify-between px-4 md:px-8 h-16 text-[#6B7280] font-mono shadow-md bg-white relative z-50">
+        {/* Logo */}
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}> 
+          <img src={Pizzalogo} alt="Pizza logo" className="h-10 w-10" />
+          <p className="text-lg font-bold text-black">Pizza App</p>
+        </div>
 
-    return (
-        <div>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex gap-6">
+          <Link to="/menu" className="hover:text-[#FF9110]">Menu</Link>
+          <Link to="/services" className="hover:text-[#FF9110]">Services</Link>
+          <Link to="/about" className="hover:text-[#FF9110]">About</Link>
+        </div>
 
-            <nav className="flex items-center justify-around h-16 text-[#6B7280] font-mono border-none shadow-md">
+        {/* Right Side */}
+        <div className="flex items-center gap-4">
+          {isLoggedIn && (
+            <Link to="/cart" className="relative">
+              <img src={CartIcon} className="w-7 h-7" alt="Cart" />
+              <span className="absolute -top-1 -right-2 text-xs bg-red-500 text-white rounded-full px-1">
+                {cartsData?.items?.length || 0}
+              </span>
+            </Link>
+          )}
+          <div className="hover:text-[#FF9110]">
+            {isLoggedIn ? (
+              <button onClick={handleLogout}>Logout</button>
+            ) : (
+              <Link to="/auth/login">Login</Link>
+            )}
+          </div>
 
-                <div className="flex items-center justify-center"
-                    onClick={() => navigate('/')}
-                >
-                    <p>Pizza App</p>
-                    <img src={Pizzalogo} alt="Pizza logo" />
-                </div>
+          {/* Hamburger Icon */}
+          <button
+            className="md:hidden focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+        </div>
 
-                <div className='hidden md:block'>
-                    <ul className='flex gap-4'>
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-white flex flex-col items-center space-y-4 py-4 shadow-md md:hidden">
+            <Link to="/menu" className="hover:text-[#FF9110]">Menu</Link>
+            <Link to="/services" className="hover:text-[#FF9110]">Services</Link>
+            <Link to="/about" className="hover:text-[#FF9110]">About</Link>
+          </div>
+        )}
+      </nav>
 
-                        <li className='hover:text-[#FF9110]'>
-                            { ' ' }
-                            <p>Menu {' '}</p>
-                        </li>
+      {children}
 
-                        <li className='hover:text-[#FF9110]'>
-                            { ' ' }
-                            <p>Services {' '}</p>
-                        </li>
-
-                        <li className='hover:text-[#FF9110]'>
-                            { ' ' }
-                            <p>About {' '}</p>
-                        </li>
-
-                    </ul>
-                </div>
-
-                <div>
-                    <ul className='flex gap-4'>
-                        <li className='hover:text-[#FF9110]'>
-                            {isLoggedIn ? (
-                                <Link onClick={handleLogout}>Logout</Link>
-                            ) : (
-                                <Link to={'/auth/login'}>Login</Link>
-                            )}
-                        </li>
-
-                        {isLoggedIn && (
-                            <Link to={'/cart'}>
-                                <li>
-                                    <img src={CartIcon} className='w-8 h-8 inline' />
-                                    {' '}
-                                    <p className='text-black inline'>{cartsData?.items?.length}</p>
-                                </li>
-                            </Link>
-                            
-                        )}
-                    </ul>
-                </div>
-
-
-
-            </nav>
-
-                {children}
-
-            <Footer />
-        </div>  
-    )
+      <Footer />
+    </div>
+  );
 }
 
 export default Layout;
