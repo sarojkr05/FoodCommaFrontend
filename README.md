@@ -25,6 +25,12 @@ FoodComma is a modern, full-stack pizza ordering web application built with the 
 ---
 
 ## 📸 Screenshots
+![Screenshot 2025-07-06 112447](https://github.com/user-attachments/assets/f23b28c4-307b-46d7-941b-ba5abee94bb6)
+![Screenshot 2025-07-06 112515](https://github.com/user-attachments/assets/bb02de6e-3b3f-4376-a831-80fd3746000c)
+![Screenshot 2025-07-06 114041](https://github.com/user-attachments/assets/554d67a4-1fbf-4c0d-80fe-d1c9ec8c63df)
+![Screenshot 2025-07-06 114105](https://github.com/user-attachments/assets/7c2a96fb-6603-46bd-9174-095e1e12d50a)
+![Screenshot 2025-07-06 114133](https://github.com/user-attachments/assets/7e183061-897b-48b4-a458-3813f4f95e17)
+![Screenshot 2025-07-06 114201](https://github.com/user-attachments/assets/d46d1735-bbb8-41dd-8d3d-32e29dfc2a2c)
 
 > Add your screenshots here using Markdown:
 
